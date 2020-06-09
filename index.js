@@ -17,10 +17,10 @@ app.listen(PORT, () => console.log(`Example app listening at http://127.0.0.1:${
 function handleIndex(request, response) {
   var battlesnakeInfo = {
     apiversion: '1',
-    author: '',
-    color: '#888888',
-    head: 'default',
-    tail: 'default'
+    author: 'Suraj Mistry',
+    color: '#CBF5F2',
+    head: 'shac-caffeine',
+    tail: 'shac-coffee'
   }
   response.status(200).json(battlesnakeInfo)
 }
