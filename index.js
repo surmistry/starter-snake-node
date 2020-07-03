@@ -36,6 +36,9 @@ const handleMove = (request, response) => {
   const gameData = request.body
 
   const possibleMoves = ['up', 'down', 'left', 'right']
+  const move = possibleMoves[Math.floor(Math.random() * possibleMoves.length)]
+
+  const possibleMoves = ['up', 'down', 'left', 'right']
   // const move = possibleMoves[Math.floor(Math.random() * possibleMoves.length)]
   const { move } = findBestDecision(gameData);
   cogameDatasole.log('MOVE: ' + move)
