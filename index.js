@@ -1,18 +1,10 @@
 const bodyParser = require('body-parser')
 const express = require('express')
-const findBestDecision = require('matrix');
+const findBestDecision = require('./lib/matrix');
 const PORT = process.env.PORT || 3000
 
 const app = express()
 app.use(bodyParser.json())
-
-app.get('/', handleIndex)
-app.post('/start', handleStart)
-app.post('/move', handleMove)
-app.post('/end', handleEnd)
-
-app.listen(PORT, () => console.log(`Example app listening at http://127.0.0.1:${PORT}`))
-
 
 const handleIndex = (request, response) => {
   const battlesnakeInfo = {
@@ -25,6 +17,10 @@ const handleIndex = (request, response) => {
   response.status(200).json(battlesnakeInfo)
 }
 
+app.listen(PORT, () => console.log(`Example app listening at http://127.0.0.1:${PORT}`))
+
+
+
 const handleStart = (request, response) => {
   const gameData = request.body
 
@@ -34,11 +30,6 @@ const handleStart = (request, response) => {
 
 const handleMove = (request, response) => {
   const gameData = request.body
-
-  const possibleMoves = ['up', 'down', 'left', 'right']
-  const move = possibleMoves[Math.floor(Math.random() * possibleMoves.length)]
-
-  const possibleMoves = ['up', 'down', 'left', 'right']
   // const move = possibleMoves[Math.floor(Math.random() * possibleMoves.length)]
   const { move } = findBestDecision(gameData);
   cogameDatasole.log('MOVE: ' + move)
@@ -53,3 +44,8 @@ function handleEnd(request, response) {
   console.log('END')
   response.status(200).send('ok')
 }
+
+app.get('/', handleIndex)
+app.post('/start', handleStart)
+app.post('/move', handleMove)
+app.post('/end', handleEnd)
